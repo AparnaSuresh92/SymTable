@@ -1,0 +1,165 @@
+#include<conio.h>
+#include<stdio.h>
+#include<assert.h>
+#include<stdlib.h>
+#include<string.h>
+struct symtable {
+   char *key;
+   void * value;
+   struct symtable * next;
+};
+typedef struct symtable* Sym_Table_t;
+
+Sym_Table_t Sym_Table_new(char* key, int value)
+{
+	Sym_Table_t current;
+	current = (Sym_Table_t)malloc(sizeof(Sym_Table_t));
+	current->key = key;
+	current->next = NULL;
+	current->value = value;
+    if(current==NULL)
+    {
+    return NULL;
+	}
+    else
+    {
+    return current ;
+	}
+}
+void Sym_Table_free(Sym_Table_t oSymTable)
+{
+	
+	if (oSymTable == NULL)
+      return;
+	free(oSymTable);
+}
+
+int SymTable_getLength (Sym_Table_t oSymTable)
+{
+
+assert(oSymTable!= NULL);
+int length = 0;
+        while(oSymTable !=NULL )
+        {
+           length++;
+           oSymTable =oSymTable->next;
+        }
+       return length; 	
+}
+
+int SymTable_print (Sym_Table_t oSymTable)
+{
+
+printf("%s ", oSymTable->key);
+printf("%d\n", oSymTable->value);
+
+}
+
+int SymTable_contains (Sym_Table_t oSymTable, const char *pcKey)
+{
+//while(oSymTable->next != NULL)
+//{
+
+     if(strcmp(oSymTable->key,pcKey)==0)
+     return 1;
+     else 
+     return 0;
+//     oSymTable=oSymTable->next;
+// }
+
+}
+char *Sym_Table_get (Sym_Table_t oSymTable, const char *pcKey)
+{
+	if(oSymTable == NULL)
+		return NULL;
+	else
+	{
+		if(strcmp(oSymTable->key,pcKey))
+		{
+			return oSymTable->value;
+		}
+		while(oSymTable->next != NULL)
+		{
+			if(strcmp(oSymTable->key,pcKey))
+			{
+	   			return oSymTable->value;
+			}
+			oSymTable= oSymTable->next;
+		}
+		return NULL;
+	}
+  
+}
+int Sym_Table_put (void)
+
+{
+Sym_Table_t node[10];
+int i,j;
+char key1[10][10];
+int value1[10];
+printf("enter the no of bindings in the table");
+scanf("%d",&j);
+printf("enter ur %d keys here",j);
+for(i=0;i<j;i++)
+{
+	scanf("%s",key1[i]);
+}
+printf("enter ur %d values here",j);
+for(i=0;i<j;i++)
+{
+	scanf("%d",&value1[i]);
+}
+for(i=0;i<j;i++)  
+{
+	node[i]=Sym_Table_new(key1[i], value1[i]);
+	SymTable_print(node[i]);
+}
+}
+//{
+//if(SymTable_contains (oSymTable,pcKey) == 0)
+//	{
+//		if(oSymTable == NULL)
+//		{
+//			printf("bossy");
+//			(oSymTable) = (Sym_Table_t)malloc(sizeof(Sym_Table_t));
+//			(oSymTable)->next = NULL;
+//			(oSymTable)->Key = (char*)malloc(strlen(pcKey));
+//			(oSymTable)->Value = (char*)malloc(strlen(pvValue));
+//			strcpy((oSymTable)->Key,pcKey);
+//			strcpy((oSymTable)->Value,pvValue);
+//			return 1;
+//		}	
+//}
+void main()
+{
+Sym_Table_t node;
+char *pckey;
+Sym_Table_put();
+//int i,j;
+//char key1[10][10];
+//    int value1[10];
+//   printf("enter the no of bindings in the table");
+//scanf("%d",&j);
+//   	printf("enter ur %d keys here",j);
+//   for(i=0;i<j;i++)
+//{
+//	scanf("%s",key1[i]);
+//}
+//	printf("enter ur %d values here",j);
+//for(i=0;i<j;i++)
+//{
+//	scanf("%d",&value1[i]);
+//}
+//for(i=0;i<j;i++)  
+//{
+//	node[i]=Sym_Table_new(key1[i], value1[i]);
+//	SymTable_print(node[i]);
+//}
+//printf("enter the pckey");
+//scanf("%s",pckey);
+//node=Sym_Table_new();
+//SymTable_print(node);
+Sym_Table_get (node,"apar");
+//i=SymTable_contains (node, "apar");
+//printf("%d",i) ;
+}
